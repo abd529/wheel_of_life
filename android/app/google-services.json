@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "718501639132",
+    "project_id": "wheel-of-life-cac8b",
+    "storage_bucket": "wheel-of-life-cac8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718501639132:android:5a970245f16e1e0fb99519",
+        "android_client_info": {
+          "package_name": "com.example.wheel_of_life"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718501639132-cvrvk509ve3ph24b8v8tp9ti8cqk4vpq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSL1derHoWPHyORUUX3J8hZV6QQObOxdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718501639132-cvrvk509ve3ph24b8v8tp9ti8cqk4vpq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
