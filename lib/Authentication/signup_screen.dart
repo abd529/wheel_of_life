@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
 
 import '../Models/register_VM.dart';
+import 'login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -134,6 +135,15 @@ class _SignupScreenState extends State<SignupScreen> {
                     ? const CircularProgressIndicator()
                     : const Text('Sign Up'),
                 ),
+                 TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
+                child: const Text('Already have an account? Login up here'),
+              ),
               ],
             ),
           ),
