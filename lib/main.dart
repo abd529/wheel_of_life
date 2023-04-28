@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/quiz_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'Authentication/login_screen.dart';
 import 'l10n/l10n.dart';
 
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FirebaseAuth.instance.currentUser != null? const logQuiz() : LoginScreen(),
+      home: FirebaseAuth.instance.currentUser != null? const Onboard() : LoginScreen(),
       supportedLocales: L10n.all,
       locale: _locale,
       localizationsDelegates: const [
@@ -48,6 +49,9 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
       ],
+      routes: {
+        logQuiz.routeName : (context) => const logQuiz(), 
+      },
     );
   }
 }
