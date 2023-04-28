@@ -87,10 +87,16 @@ class _OnboardState extends State<Onboard> {
               Radio(value: "it", groupValue: lang, onChanged: changeLocale),
             ],
           ),
-           Row(
+          Row(
             children: [
               const Text("中文的"),
               Radio(value: "zh", groupValue: lang, onChanged: changeLocale),
+            ],
+          ),
+          Row(
+            children: [
+              const Text("Arabic"),
+              Radio(value: "ar", groupValue: lang, onChanged: changeLocale),
             ],
           ),
           Text("The current language is ${AppLocalizations.of(context)!.language}", style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
