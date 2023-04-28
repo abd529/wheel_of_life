@@ -1,6 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
+import '../main.dart';
+
 
 class Onboard extends StatefulWidget {
   const Onboard({super.key});
@@ -15,6 +21,8 @@ class _OnboardState extends State<Onboard> {
   String lName = "";
   int num = 0;
   final userId = FirebaseAuth.instance.currentUser!.uid;
+  
+
   getInfo() async{
       var collection = FirebaseFirestore.instance.collection('UsersData');
       var docSnapshot = await collection.doc(userId).get();
@@ -28,6 +36,10 @@ class _OnboardState extends State<Onboard> {
       }
   }
 
+  changeLocale(value){
+   MyApp.setLocale(context,Locale(value));
+  }
+  
   @override
   Widget build(BuildContext context) {
      if (num == 0) {
@@ -35,6 +47,8 @@ class _OnboardState extends State<Onboard> {
           .addPostFrameCallback((_) => getInfo());
       num++;
     }
+    String lang =  Localizations.localeOf(context).toString();
+    print(lang);
     return  Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -42,10 +56,44 @@ class _OnboardState extends State<Onboard> {
           mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children:  [
-          //const Text("Onboarding Screen"),
-          Text(email),
-          Text(fName),
-          Text(lName)
+          Row(
+            children: [
+              const Text("Espanol"),
+              Radio(value: "es", groupValue: lang, onChanged: changeLocale),
+            ],
+          ),
+          Row(
+            children: [
+              const Text("Portuguese"),
+              Radio(value: "pt", groupValue: lang, onChanged: changeLocale),
+            ],
+          ),
+           Row(
+            children: [
+              const Text("Francias"),
+              Radio(value: "fr", groupValue: lang, onChanged: changeLocale),
+            ],
+          ),
+           Row(
+            children: [
+              const Text("English"),
+              Radio(value: "en", groupValue: lang, onChanged: changeLocale),
+            ],
+          ),
+           Row(
+            children: [
+              const Text("Italiano"),
+              Radio(value: "it", groupValue: lang, onChanged: changeLocale),
+            ],
+          ),
+           Row(
+            children: [
+              const Text("中文的"),
+              Radio(value: "zh", groupValue: lang, onChanged: changeLocale),
+            ],
+          ),
+          Text("The current language is ${AppLocalizations.of(context)!.language}", style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+
         ],
       ),),
     );
