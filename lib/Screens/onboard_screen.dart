@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Onboard extends StatefulWidget {
@@ -13,9 +14,10 @@ class _OnboardState extends State<Onboard> {
   String fName = "";
   String lName = "";
   int num = 0;
+  final userId = FirebaseAuth.instance.currentUser!.uid;
   getInfo() async{
       var collection = FirebaseFirestore.instance.collection('UsersData');
-      var docSnapshot = await collection.doc("abd3@gmail.com").get();
+      var docSnapshot = await collection.doc(userId).get();
       if (docSnapshot.exists) {
       Map<String, dynamic>? data = docSnapshot.data();
       setState(() {
@@ -35,7 +37,7 @@ class _OnboardState extends State<Onboard> {
     }
     return  Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,

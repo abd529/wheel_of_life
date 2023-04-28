@@ -20,7 +20,6 @@ class RegisterViewModel extends ChangeNotifier {
       );
       await FirebaseAuth.instance.currentUser!.updateDisplayName(fName);
       isRegistered = userCredential != null;
-      await FirebaseFirestore.instance.collection("UsersData").doc(email).set({"First Name":fName, "Last Name":lName,"Email":email});
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
         message = "Password is too weak";

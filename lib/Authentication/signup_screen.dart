@@ -123,9 +123,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       });
                       // call Firebase function to sign up user
                       bool isRegistered = false;
-                       isRegistered = await _registerVM.register(_emailController.text,
-            _passwordController.text, _fNameController.text, _lNameController.text);
+                       isRegistered = await _registerVM.register(_emailController.text.trim(),
+            _passwordController.text.trim(), _fNameController.text.trim(), _lNameController.text.trim());
                       if (isRegistered) {
+                        var userId = FirebaseAuth.instance.currentUser!.uid;
+                        await FirebaseFirestore.instance.collection("UsersData").doc(userId).set({"First Name":_fNameController.text.trim(), "Last Name":_lNameController.text.trim(),"Email":_emailController.text.trim()});
                         Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (ctx) => const Onboard()),
             (Route<dynamic> route) => false);
                      }

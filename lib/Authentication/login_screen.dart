@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wheel_of_life/Authentication/signup_screen.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
 
@@ -91,6 +93,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: const Text('Don\'t have an account? Sign up here'),
               ),
+  //             TextButton(onPressed: (){
+  //                 Future<User?> signInWithGoogle() async {
+  //   //final GoogleSignInAccount? googleSignInAccount =
+  //      // await _googleSignIn.signIn();
+  //   //final GoogleSignInAuthentication googleSignInAuthentication =
+  //     //  await googleSignInAccount!.authentication;
+
+  //   // final AuthCredential credential = GoogleAuthProvider.credential(
+  //   //   accessToken: googleSignInAuthentication.accessToken,
+  //   //   idToken: googleSignInAuthentication.idToken,
+  //   // );
+
+  //   // final UserCredential authResult =
+  //   //     await _auth.signInWithCredential(credential);
+  //   // final User? user = authResult.user;
+  //   // return user;
+  // }
+  //             } ,child: const Text("Google", style: TextStyle(fontSize: 20)),)
             ],
           ),
         ),
