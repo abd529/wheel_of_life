@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
-import 'package:wheel_of_life/Quiz%20Functionality/quiz_screen.dart';
+import 'package:wheel_of_life/Screens/youtube_screen.dart';
 
 import '../main.dart';
 
@@ -96,7 +96,7 @@ class _OnboardState extends State<Onboard> {
           Text("The current language is ${AppLocalizations.of(context)!.language}", style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
           const SizedBox(height: 80,),
           ElevatedButton(onPressed: (){
-            Navigator.of(context).pushNamed(logQuiz.routeName);
+            Navigator.of(context).pushNamed(VideoScreen.routeName);
           }, child: const Text("Start Answering Question"))
         ],
       ),),
