@@ -93,12 +93,6 @@ class _OnboardState extends State<Onboard> {
               Radio(value: "zh", groupValue: lang, onChanged: changeLocale),
             ],
           ),
-          Row(
-            children: [
-              const Text("Arabic"),
-              Radio(value: "ar", groupValue: lang, onChanged: changeLocale),
-            ],
-          ),
           Text("The current language is ${AppLocalizations.of(context)!.language}", style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
           const SizedBox(height: 80,),
           ElevatedButton(onPressed: (){
