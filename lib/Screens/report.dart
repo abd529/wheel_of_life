@@ -1,11 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, depend_on_referenced_packages
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graphic/graphic.dart';
-import 'package:wheel_of_life/Authentication/signup_screen.dart';
-import 'package:numberpicker/numberpicker.dart';
-import '../Utilities/data.dart';
+import 'package:wheel_of_life/Screens/wheel.dart';
 
 class DetailPage extends StatefulWidget {
   static const routeName = "report-page";
@@ -18,9 +16,66 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  int check = 0;
   int _currentValue = 5;
+  int baseQ1 = 0;
+  int baseQ2 = 0;
+  int baseQ3 = 0;
+  int baseQ4 = 0;
+  int baseQ5 = 0;
+  int baseQ6 = 0;
+  int baseQ7 = 0;
+  int baseQ8 = 0;
+  var adjustData = [];
+  final userId = FirebaseAuth.instance.currentUser!.uid;
+  void getInfo()async{
+      var collection = FirebaseFirestore.instance.collection('User Answers');
+      var docSnapshot = await collection.doc("$userId Base Line").get();
+      if (docSnapshot.exists) {
+      Map<String, dynamic>? data = docSnapshot.data();
+      setState(() {
+        baseQ1 = data?["Q1"];
+        baseQ2 = data?["Q2"];
+        baseQ3 = data?["Q3"];
+        baseQ4 = data?["Q4"];
+        baseQ5 = data?["Q5"];
+        baseQ6 = data?["Q6"];
+        baseQ7 = data?["Q7"];
+        baseQ8 = data?["Q8"];
+      });
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
+    var adjustData = [
+  {"type": "BaseLine", "index": "Health", "value": baseQ1},
+  {"type": "BaseLine", "index": "Personal Growth", "value": baseQ2},
+  {"type": "BaseLine", "index": "Home", "value": baseQ3},
+  {"type": "BaseLine", "index": "Family & Friends", "value": baseQ4},
+  {"type": "BaseLine", "index": "Love", "value": baseQ5},
+  {"type": "BaseLine", "index": "Free Time", "value": baseQ6},
+  {"type": "BaseLine", "index": "Work", "value": baseQ7},
+  {"type": "BaseLine", "index": "Money", "value": baseQ8},
+
+  {"type": "Results", "index": "Health", "value": 0},
+  {"type": "Results", "index": "Personal Growth", "value": 1},
+  {"type": "Results", "index": "Home", "value": 2},
+  {"type": "Results", "index": "Family & Friends", "value": 3},
+  {"type": "Results", "index": "Love", "value": 4},
+  {"type": "Results", "index": "Free Time", "value": 7},
+  {"type": "Results", "index": "Work", "value": 6},
+  {"type": "Results", "index": "Money", "value": 7},
+];
+    if (check == 0) {
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => getInfo());
+          setState(() {
+            
+          });
+      check++;
+    }
+    
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -38,67 +93,7 @@ class _DetailPageState extends State<DetailPage> {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Card(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                margin: const EdgeInsets.only(top: 10),
-                width: 350,
-                height: 300,
-                child: Chart(
-                  data: adjustData,
-                  variables: {
-                    'index': Variable(
-                      accessor: (Map map) => map['index'].toString(),
-                    ),
-                    'type': Variable(
-                      accessor: (Map map) => map['type'] as String,
-                    ),
-                    'value': Variable(
-                      accessor: (Map map) => map['value'] as num,
-                    ),
-                  },
-                  marks: [
-                    LineMark(
-                      position:
-                          Varset('index') * Varset('value') / Varset('type'),
-                      shape: ShapeEncode(value: BasicLineShape(loop: true)),
-                      color: ColorEncode(
-                          variable: 'type', values: Defaults.colors10),
-                    )
-                  ],
-                  coord: PolarCoord(),
-                  axes: [
-                    Defaults.circularAxis,
-                    Defaults.radialAxis,
-                  ],
-                  selections: {
-                    'touchMove': PointSelection(
-                      on: {
-                        GestureType.scaleUpdate,
-                        GestureType.tapDown,
-                        GestureType.longPressMoveUpdate
-                      },
-                      dim: Dim.x,
-                      variable: 'index',
-                    )
-                  },
-                  tooltip: TooltipGuide(
-                    anchor: (_) => Offset.zero,
-                    align: Alignment.bottomRight,
-                    multiTuples: true,
-                    variables: ['type', 'value'],
-                  ),
-                  crosshair: CrosshairGuide(followPointer: [false, true]),
-                ),
-              ),
-                ],
-              ),
-            ),
-          ),
+          
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Card(
@@ -110,10 +105,10 @@ class _DetailPageState extends State<DetailPage> {
                   DefaultTextStyle.merge(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children:const [
-                         Text("Total"),
+                      children: [
+                         const Text("Q1"),
                          Text(
-                          "\$529.29",
+                          baseQ1.toString(),
                         ),
                       ],
                     ),
@@ -124,21 +119,34 @@ class _DetailPageState extends State<DetailPage> {
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => SignupScreen(),
+                                    builder: (_) => WheelOfLife(adjustData: [
+  {"type": "BaseLine", "index": "Health", "value": baseQ1},
+  {"type": "BaseLine", "index": "Personal Growth", "value": baseQ2},
+  {"type": "BaseLine", "index": "Home", "value": baseQ3},
+  {"type": "BaseLine", "index": "Family & Friends", "value": baseQ4},
+  {"type": "BaseLine", "index": "Love", "value": baseQ5},
+  {"type": "BaseLine", "index": "Free Time", "value": baseQ6},
+  {"type": "BaseLine", "index": "Work", "value": baseQ7},
+  {"type": "BaseLine", "index": "Money", "value": baseQ8},
+
+  const {"type": "Results", "index": "Health", "value": 0},
+  const {"type": "Results", "index": "Personal Growth", "value": 1},
+  const {"type": "Results", "index": "Home", "value": 2},
+  const {"type": "Results", "index": "Family & Friends", "value": 3},
+  const {"type": "Results", "index": "Love", "value": 4},
+  const {"type": "Results", "index": "Free Time", "value": 7},
+  const {"type": "Results", "index": "Work", "value": 6},
+  const {"type": "Results", "index": "Money", "value": 7},
+]),
                                   ),
                                   (Route<dynamic> route) => false);
-                            }, child: Text("Log out"))
+                            }, child: Text("See Wheel of life"))
                 ],
               ),
             ),
           ),
-          NumberPicker(
-          value:_currentValue,
-          minValue: 0,
-          maxValue: 10,
-          onChanged: (value) => setState(() => _currentValue = value),
-        ),
-        Text('Current value: $_currentValue'),
+          Center(child: Text(baseQ1.toString())),
+          Center(child: Text(baseQ8.toString())),
         ],
       ),
     );

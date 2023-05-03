@@ -55,7 +55,8 @@ class _MyAppState extends State<MyApp> {
       routes: {
         logQuiz.routeName : (ctx) => const logQuiz(),
         VideoScreen.routeName : (ctx) => VideoScreen(),
-        DetailPage.routeName : (ctx) => const DetailPage(), 
+        DetailPage.routeName : (ctx) => const DetailPage(),
+        Quiz.routeName : (ctx) => const Quiz() 
       },
     );
   }

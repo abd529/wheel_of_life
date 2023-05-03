@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:wheel_of_life/Screens/report.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 
+import '../Quiz Functionality/Quiz/quiz.dart';
 import '../main.dart';
 
 
@@ -101,7 +102,10 @@ class _OnboardState extends State<Onboard> {
           }, child: const Text("Start Answering Question")),
           ElevatedButton(onPressed: (){
             Navigator.of(context).pushNamed(DetailPage.routeName);
-          }, child: const Text("Report Screen"))
+          }, child: const Text("Report Screen")),
+          ElevatedButton(onPressed: (){
+            Navigator.of(context).pushNamed(Quiz.routeName);
+          }, child: const Text("My Quiz")),
         ],
       ),),
     );

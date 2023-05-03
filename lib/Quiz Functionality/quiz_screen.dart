@@ -129,13 +129,6 @@ class _logQuizState extends State<logQuiz> {
     if (_questionindex >= 6) {
       final userId = FirebaseAuth.instance.currentUser!.uid;
 
-      FirebaseFirestore.instance.collection("EmissionLevel").doc(userId).set({
-        "Emission": finalscore,
-        "planted": false,
-        "recycled": false,
-        "shopped": false,
-        "energy": false
-      });
     }
   }
 
@@ -169,14 +162,5 @@ class _logQuizState extends State<logQuiz> {
     );
   }
 
-  // Widget navigate(double em) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //         builder: (context) => Home(
-  //               emissions: em,
-  //             )),
-  //   );
-  //   return Container();
-  // }
+  
 }
