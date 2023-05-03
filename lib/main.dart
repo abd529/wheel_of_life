@@ -7,6 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 import 'Authentication/login_screen.dart';
+import 'Quiz Functionality/Quiz/quiz.dart';
+import 'Screens/report.dart';
 import 'l10n/l10n.dart';
 
 void main() async{
@@ -41,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FirebaseAuth.instance.currentUser != null? const Onboard() : LoginScreen(),
+      home: FirebaseAuth.instance.currentUser != null? const DetailPage() : LoginScreen(),
       supportedLocales: L10n.all,
       locale: _locale,
       localizationsDelegates: const [
@@ -52,7 +54,8 @@ class _MyAppState extends State<MyApp> {
       ],
       routes: {
         logQuiz.routeName : (ctx) => const logQuiz(),
-        VideoScreen.routeName : (ctx) => VideoScreen() 
+        VideoScreen.routeName : (ctx) => VideoScreen(),
+        DetailPage.routeName : (ctx) => const DetailPage(), 
       },
     );
   }

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import 'package:wheel_of_life/Screens/report.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 
 import '../main.dart';
@@ -97,7 +98,10 @@ class _OnboardState extends State<Onboard> {
           const SizedBox(height: 80,),
           ElevatedButton(onPressed: (){
             Navigator.of(context).pushNamed(VideoScreen.routeName);
-          }, child: const Text("Start Answering Question"))
+          }, child: const Text("Start Answering Question")),
+          ElevatedButton(onPressed: (){
+            Navigator.of(context).pushNamed(DetailPage.routeName);
+          }, child: const Text("Report Screen"))
         ],
       ),),
     );
