@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/quiz_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
+import 'package:wheel_of_life/Screens/pdf_screen.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 import 'Authentication/login_screen.dart';
 import 'Quiz Functionality/Quiz/quiz.dart';
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FirebaseAuth.instance.currentUser != null? const DetailPage() : LoginScreen(),
+      home: FirebaseAuth.instance.currentUser != null? PDFScreen() : LoginScreen(),
       supportedLocales: L10n.all,
       locale: _locale,
       localizationsDelegates: const [
