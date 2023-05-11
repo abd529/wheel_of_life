@@ -63,6 +63,7 @@ dev_dependencies:
   visibility_detector: ^0.4.0+2
   numberpicker: ^2.1.2
   firebase_storage: ^11.1.2
+  flutter_stripe: ^9.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
