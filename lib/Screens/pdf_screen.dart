@@ -14,7 +14,7 @@ class PDFScreen extends StatelessWidget {
   final pdf = pdfWidgets.Document();
   pdf.addPage(pdfWidgets.Page(
     build: (context) => pdfWidgets.Center(
-      child: pdfWidgets.Text('Hello, world!', style: pdfWidgets.TextStyle(fontSize: 24)),
+      child: pdfWidgets.Text('Hellooooooooooo, world!', style: pdfWidgets.TextStyle(fontSize: 24)),
     ),
   ));
   final pdfBytes = await pdf.save();
@@ -23,7 +23,7 @@ class PDFScreen extends StatelessWidget {
 }
 
 Future<void> uploadPdfToFirebaseStorage(String fileName, List<int> pdfBytes) async {
-  final ref = FirebaseStorage.instance.ref().child("PDF Docs");
+  final ref = FirebaseStorage.instance.ref().child(userId);
   await ref.putData(Uint8List.fromList(pdfBytes));
   // PDF file is now saved to Firebase Cloud Storage
 }
