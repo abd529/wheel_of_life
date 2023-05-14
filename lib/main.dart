@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wheel_of_life/Authentication/forgot_password.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/quiz_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
-import 'package:wheel_of_life/Screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 import 'Authentication/login_screen.dart';
