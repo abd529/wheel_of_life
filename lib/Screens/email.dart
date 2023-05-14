@@ -1,8 +1,8 @@
-import 'dart:convert';
+
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 

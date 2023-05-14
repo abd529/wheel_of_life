@@ -17,7 +17,6 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   int check = 0;
-  int _currentValue = 5;
   int baseQ1 = 0;
   int baseQ2 = 0;
   int baseQ3 = 0;
@@ -48,25 +47,6 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    var adjustData = [
-  {"type": "BaseLine", "index": "Health", "value": baseQ1},
-  {"type": "BaseLine", "index": "Personal Growth", "value": baseQ2},
-  {"type": "BaseLine", "index": "Home", "value": baseQ3},
-  {"type": "BaseLine", "index": "Family & Friends", "value": baseQ4},
-  {"type": "BaseLine", "index": "Love", "value": baseQ5},
-  {"type": "BaseLine", "index": "Free Time", "value": baseQ6},
-  {"type": "BaseLine", "index": "Work", "value": baseQ7},
-  {"type": "BaseLine", "index": "Money", "value": baseQ8},
-
-  {"type": "Results", "index": "Health", "value": 0},
-  {"type": "Results", "index": "Personal Growth", "value": 1},
-  {"type": "Results", "index": "Home", "value": 2},
-  {"type": "Results", "index": "Family & Friends", "value": 3},
-  {"type": "Results", "index": "Love", "value": 4},
-  {"type": "Results", "index": "Free Time", "value": 7},
-  {"type": "Results", "index": "Work", "value": 6},
-  {"type": "Results", "index": "Money", "value": 7},
-];
     if (check == 0) {
       WidgetsBinding.instance
           .addPostFrameCallback((_) => getInfo());
