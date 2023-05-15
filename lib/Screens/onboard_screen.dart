@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:wheel_of_life/Authentication/login_screen.dart';
+import 'package:wheel_of_life/Screens/email.dart';
 import 'package:wheel_of_life/Screens/report.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 
@@ -106,7 +107,15 @@ class _OnboardState extends State<Onboard> {
           ElevatedButton(onPressed: (){
             Navigator.of(context).pushNamed(Quiz.routeName);
           }, child: const Text("My Quiz")),
-           ElevatedButton(onPressed: ()async{
+          ElevatedButton(onPressed: ()async{
+             await FirebaseAuth.instance.signOut();
+             Navigator.of(context).pushNamed(EmailSend.routeName);
+          }, child: const Text("Email Send")),
+          ElevatedButton(onPressed: ()async{
+             await FirebaseAuth.instance.signOut();
+             Navigator.of(context).pushNamed(EmailSend.routeName);
+          }, child: const Text("Stripe")),
+          ElevatedButton(onPressed: ()async{
              await FirebaseAuth.instance.signOut();
              Navigator.of(context).pushNamed(LoginScreen.routeName);
           }, child: const Text("Log out")),

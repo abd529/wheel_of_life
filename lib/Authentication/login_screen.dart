@@ -95,9 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           obsCheck =!obsCheck;
                         });
-                      }, icon: Icon( obsCheck? Icons.visibility_off : Icons.visibility))
+                      }, icon: Icon( obsCheck? Icons.visibility : Icons.visibility_off))
                     ),
-                    obscureText: obsCheck,
+                    obscureText: !obsCheck,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your password';

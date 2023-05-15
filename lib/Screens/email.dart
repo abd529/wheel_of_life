@@ -7,6 +7,7 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 
 class EmailSend extends StatelessWidget {
+  static const routeName = "email-send";
    EmailSend({super.key});
   late Future<int> statusCode ;
 
