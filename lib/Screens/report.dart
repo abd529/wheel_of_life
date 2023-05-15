@@ -29,7 +29,7 @@ class _DetailPageState extends State<DetailPage> {
   final userId = FirebaseAuth.instance.currentUser!.uid;
   void getInfo()async{
       var collection = FirebaseFirestore.instance.collection('User Answers');
-      var docSnapshot = await collection.doc("$userId Base Line").get();
+      var docSnapshot = await collection.doc(userId).collection("Base Line").doc(userId).get();
       if (docSnapshot.exists) {
       Map<String, dynamic>? data = docSnapshot.data();
       setState(() {

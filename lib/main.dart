@@ -3,6 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wheel_of_life/Authentication/forgot_password.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/family_quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/health_quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/home_quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/love_quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/p_growth_quiz.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/quiz_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +16,7 @@ import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:wheel_of_life/Screens/stripe_payment.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 import 'Authentication/login_screen.dart';
-import 'Quiz Functionality/Quiz/quiz.dart';
+import 'Quiz Functionality/Quiz/baseline_quiz.dart';
 import 'Screens/email.dart';
 import 'Screens/home_screen.dart';
 import 'Screens/report.dart';
@@ -65,10 +70,16 @@ class _MyAppState extends State<MyApp> {
         LoginScreen.routeName : (ctx) => LoginScreen(),
         VideoScreen.routeName : (ctx) => VideoScreen(),
         DetailPage.routeName : (ctx) => const DetailPage(),
-        Quiz.routeName : (ctx) => const Quiz(),
+        BaseLineQuiz.routeName : (ctx) => const BaseLineQuiz(),
         ForgotPassword.routeName : (ctx) => ForgotPassword(),
         EmailSend.routeName : (ctx) => EmailSend(),
-        StripePayment.routeName : (ctx) => const StripePayment(), 
+        StripePayment.routeName : (ctx) => const StripePayment(),
+        Onboard.routeName : (ctx) => Onboard(),
+        HealthQuiz.routeName : (ctx) => HealthQuiz(),
+        PersonalQuiz.routeName : (ctx) => PersonalQuiz(),
+        HomeQuiz.routeName : (ctx) => HomeQuiz(),
+        FamilyQuiz.routeName : (ctx) => FamilyQuiz(),
+        LoveQuiz.routeName: (ctx) => LoveQuiz() 
       },
     );
   }

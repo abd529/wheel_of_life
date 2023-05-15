@@ -4,20 +4,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:wheel_of_life/Screens/report.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
 
-class Quiz extends StatefulWidget {
-  static const routeName = "my-quiz";
-  const Quiz({super.key});
+class BaseLineQuiz extends StatefulWidget {
+  static const routeName = "my-BaseLinequiz";
+  const BaseLineQuiz({super.key});
 
   @override
-  State<Quiz> createState() => _QuizState();
+  State<BaseLineQuiz> createState() => _BaseLineQuizState();
 }
 
-class _QuizState extends State<Quiz> {
+class _BaseLineQuizState extends State<BaseLineQuiz> {
   List<String> Questions = [
     "Q1: How do you feel you are in this area ?",
     "Q2: How do you feel you are in this area ?",
@@ -30,7 +31,7 @@ class _QuizState extends State<Quiz> {
     "You are done",
     "You are done 2",
     ];
-  List<String> topic = ["Health","Personal Growth","Home","Family & Friends","Love","Free Time", "Work", "Money"];
+  List<String> topic = ["Health","Personal Growth","Home","Family & Friends","Love","Free Time", "Work", "Money",];
   List<String> images = ["assets/health.png","assets/personal growth.png","assets/home.png" ,"assets/family-friends.png","assets/love.png","assets/free-time.png","assets/work.png","assets/money.png" ];
   int index = 0;
   int _currentValue = 5;
@@ -63,7 +64,8 @@ class _QuizState extends State<Quiz> {
                     children: [
                     const BackButton(),
                      Center(
-                        child: SvgPicture.asset(
+                        child: 
+                        SvgPicture.asset(
                                      "assets/logo.svg",
                                      width: 85,
                                      height: 85,
@@ -73,13 +75,13 @@ class _QuizState extends State<Quiz> {
                   ]),
                   ),
                   const SizedBox(height:50),
-                  Text(topic[index], style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                 index<=7? Text(topic[index], style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),):SizedBox(height: 20,),
                 Align(
                   alignment: Alignment.center,
                   child: Text(Questions[index],textAlign: TextAlign.center ,style: const TextStyle(fontSize: 18),)),
                   Positioned(
                       bottom: 0,
-                      child: Image.asset(images[index], height: size.height/2,width: size.width/1)),
+                      child:index<=7? Image.asset(images[index], height: size.height/2,width: size.width/1):SizedBox(height:20),), 
                   const  SizedBox(height: 30,),
                 index>7? const SizedBox(height: 20,): NumberPicker(
                   itemCount: 3,
@@ -173,7 +175,7 @@ class _QuizState extends State<Quiz> {
                     //Store Data to Fire Store
                     FirebaseFirestore.instance
               .collection("User Answers") //folder
-              .doc("$userId Base Line").set({
+              .doc(userId).collection("Base Line").doc(userId).set({
             "Q1": BaseAns1,
             "Q2": BaseAns2,
             "Q3": BaseAns3,
@@ -184,7 +186,7 @@ class _QuizState extends State<Quiz> {
             "Q8": BaseAns8,
           });
                     print("Data Stored and UserId is $userId");
-                    Navigator.of(context).pushNamed(DetailPage.routeName);
+                    Navigator.of(context).pushNamed(Onboard.routeName);
         
                   }
                 }, child:  index<=7? const Text("Next"):const Text("Finish") )

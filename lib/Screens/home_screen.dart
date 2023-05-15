@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wheel_of_life/Authentication/login_screen.dart';
-import 'package:wheel_of_life/Quiz%20Functionality/Quiz/quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/baseline_quiz.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", softWrap: true, textAlign: TextAlign.justify,),
               const SizedBox(height: 30,),
               ElevatedButton(onPressed: (){
-                Navigator.of(context).pushNamed(Quiz.routeName);
+                Navigator.of(context).pushNamed(BaseLineQuiz.routeName);
               },  style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
                         shape: RoundedRectangleBorder( //to set border radius to button

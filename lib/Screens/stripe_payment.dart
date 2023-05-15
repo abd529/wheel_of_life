@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:http/http.dart' as https;
+import 'package:http/http.dart' as http;
 
 class StripePayment extends StatefulWidget {
   static const routeName = "stripe-pay";
@@ -14,15 +14,16 @@ class StripePayment extends StatefulWidget {
 }
 
 class _StripePaymentState extends State<StripePayment> {
+  bool payCheck = false;
   Map<String, dynamic> paymentIntent = {};
   createPaymentIntent(String amount, String currency) async {
     try {
       Map<String, dynamic> body = {
-        'amount': "100",
+        'amount': "1000",
         'currency': "USD",
         'payment_method_types[]': 'card'
       };
-      var response = await https.post(
+      var response = await http.post(
           Uri.parse('https://api.stripe.com/v1/payment_intents'),
           body: body,
           headers: {
@@ -67,7 +68,7 @@ class _StripePaymentState extends State<StripePayment> {
     }
   }
 
-  void makePayment()async{
+  Future<bool> makePayment()async{
     print("test 1 passed");
     try {
       paymentIntent = await createPaymentIntent("200","USD"); //json.decode(response.body);
@@ -83,12 +84,12 @@ class _StripePaymentState extends State<StripePayment> {
       print("test 3 passed");    
       displayPaymentSheet();
       print("test 8 passed");
-     // return true;
+      return true;
     } catch (e, s) {
       if (kDebugMode) {
         print(s);
       }
-     // return false;
+     return false;
     }
   }
 
@@ -101,8 +102,10 @@ class _StripePaymentState extends State<StripePayment> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
         Text("Stripe Payment"),
-        ElevatedButton(onPressed: (){
-          makePayment();
+        ElevatedButton(onPressed: ()async{
+        print("hehhe");
+        makePayment();
+        print("hohoho");
         }, child: Text("Pay"))
       ]),
     );
