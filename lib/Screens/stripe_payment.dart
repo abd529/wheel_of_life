@@ -37,8 +37,8 @@ class _StripePaymentState extends State<StripePayment> {
       return jsonDecode(response.body);
     } catch (err) {
       if (kDebugMode) {
-        throw Exception(err.toString());
         print('err charging user: ${err.toString()}');
+        throw Exception(err.toString());
       }
     }
   }
@@ -91,6 +91,7 @@ class _StripePaymentState extends State<StripePayment> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
         Text("Stripe Payment"),
         ElevatedButton(onPressed: (){

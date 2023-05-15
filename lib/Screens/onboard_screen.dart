@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:wheel_of_life/Authentication/login_screen.dart';
 import 'package:wheel_of_life/Screens/email.dart';
 import 'package:wheel_of_life/Screens/report.dart';
+import 'package:wheel_of_life/Screens/stripe_payment.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 
 import '../Quiz Functionality/Quiz/quiz.dart';
@@ -113,7 +114,7 @@ class _OnboardState extends State<Onboard> {
           }, child: const Text("Email Send")),
           ElevatedButton(onPressed: ()async{
              await FirebaseAuth.instance.signOut();
-             Navigator.of(context).pushNamed(EmailSend.routeName);
+             Navigator.of(context).pushNamed(StripePayment.routeName);
           }, child: const Text("Stripe")),
           ElevatedButton(onPressed: ()async{
              await FirebaseAuth.instance.signOut();
