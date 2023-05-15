@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as https;
 
 class StripePayment extends StatefulWidget {
   static const routeName = "stripe-pay";
@@ -15,7 +15,6 @@ class StripePayment extends StatefulWidget {
 
 class _StripePaymentState extends State<StripePayment> {
   Map<String, dynamic> paymentIntent = {};
-  
   createPaymentIntent(String amount, String currency) async {
     try {
       Map<String, dynamic> body = {
@@ -23,7 +22,7 @@ class _StripePaymentState extends State<StripePayment> {
         'currency': "USD",
         'payment_method_types[]': 'card'
       };
-      var response = await http.post(
+      var response = await https.post(
           Uri.parse('https://api.stripe.com/v1/payment_intents'),
           body: body,
           headers: {
@@ -44,8 +43,11 @@ class _StripePaymentState extends State<StripePayment> {
   }
 
   void  displayPaymentSheet() async {
+    print("test 4 passed");
     try {
+      print("test 5 passed");
       await Stripe.instance.presentPaymentSheet().then((newValue) {
+        print("test 6 passed");
         // payFee();
         // paymentIntentData = null;
       }).onError((error, stackTrace) {
@@ -53,6 +55,7 @@ class _StripePaymentState extends State<StripePayment> {
           print('Exception/DISPLAYPAYMENTSHEET==> $error $stackTrace');
         }
       });
+      print("test 7 passed");
     } on StripeException catch (e) {
       if (kDebugMode) {
         print(e);
@@ -65,8 +68,10 @@ class _StripePaymentState extends State<StripePayment> {
   }
 
   void makePayment()async{
+    print("test 1 passed");
     try {
       paymentIntent = await createPaymentIntent("200","USD"); //json.decode(response.body);
+      print("test 2 passed");
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
@@ -75,7 +80,9 @@ class _StripePaymentState extends State<StripePayment> {
                   style: ThemeMode.dark,
                   merchantDisplayName: 'ANNIE'))
           .then((value) {});
+      print("test 3 passed");    
       displayPaymentSheet();
+      print("test 8 passed");
      // return true;
     } catch (e, s) {
       if (kDebugMode) {

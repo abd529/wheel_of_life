@@ -7,6 +7,7 @@ import 'package:wheel_of_life/Quiz%20Functionality/quiz_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:wheel_of_life/Screens/stripe_payment.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 import 'Authentication/login_screen.dart';
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: GoogleFonts.poppins().fontFamily,
         primarySwatch: Colors.purple,
       ),
-      home: FirebaseAuth.instance.currentUser != null? const HomeScreen() : LoginScreen(),
+      home: FirebaseAuth.instance.currentUser != null? const Onboard() : LoginScreen(),
       supportedLocales: L10n.all,
       locale: _locale,
       localizationsDelegates: const [

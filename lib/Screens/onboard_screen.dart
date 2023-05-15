@@ -113,13 +113,15 @@ class _OnboardState extends State<Onboard> {
              Navigator.of(context).pushNamed(EmailSend.routeName);
           }, child: const Text("Email Send")),
           ElevatedButton(onPressed: ()async{
-             await FirebaseAuth.instance.signOut();
              Navigator.of(context).pushNamed(StripePayment.routeName);
           }, child: const Text("Stripe")),
           ElevatedButton(onPressed: ()async{
              await FirebaseAuth.instance.signOut();
              Navigator.of(context).pushNamed(LoginScreen.routeName);
           }, child: const Text("Log out")),
+          ElevatedButton(onPressed: ()async{
+            print(userId);
+          }, child: const Text("user id")),
         ],
       ),),
     );
