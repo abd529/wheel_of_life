@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/family_quiz.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -25,7 +26,7 @@ class _HomeQuizState extends State<HomeQuiz> {
     "Q4: The house where I live satisfies me, has enough space and comfort that I need?",
     "Q5: Am I comfortable with the people with whom I share my home?",
     "Q6: How satisfied am I with the degree of comfort, cleanliness and care that I believe in my home?",
-    "You are done",
+    "Home questions are completed",
     ];
   List<String> topic = ["Country","City","District","Home","Coexistence","Home Care",];
   int index = 0;
@@ -106,66 +107,80 @@ class _HomeQuizState extends State<HomeQuiz> {
                 maxValue: 10,
                 onChanged: (value) { setState(()=> _currentValue = value);},),
                 const SizedBox(height: 40,),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
-                          shape: RoundedRectangleBorder( //to set border radius to button
-                      borderRadius: BorderRadius.circular(50)
-                   ) ),
-                  onPressed: (){
-                  if(index<=5){
-                    if(index==0){
+                Row(
+                  mainAxisAlignment: index <=5 ? MainAxisAlignment.spaceAround : MainAxisAlignment.center,
+                  children: [
+                    index<=5? ElevatedButton(onPressed: (){
                       setState(() {
-                      ans1 = _currentValue;
-                      print("the ans to Q1 is $ans1");
-                      _currentValue = 5;
-                      index++; 
+                        index--;
                       });
-                    }
-                    else if(index==1){
-                      setState(() {
-                      ans2 = _currentValue;
-                      print("the ans to Q2 is $ans2");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                    else if(index==2){
-                      setState(() {
-                      ans3 = _currentValue;
-                      print("the ans to Q3 is $ans3");
-                      _currentValue = 5;
-                      index++;
-                        
-                      }); 
-                    }
-                    else if(index==3){
-                      setState(() {
-                      ans4 = _currentValue;
-                      print("the ans to Q4 is $ans4");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                    else if(index==4){
-                      setState(() {
-                      ans5 = _currentValue;
-                      print("the ans to Q5 is $ans5");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                    else if(index==5){
-                      setState(() {ans6 = _currentValue;
-                      print("the ans to Q6 is $ans6");
-                      _currentValue = 5;
-                      index++;
-                      });
+                    }, 
+                    style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                              shape: RoundedRectangleBorder( //to set border radius to button
+                          borderRadius: BorderRadius.circular(50)
+                       ) ),
+                    child: const Text("Previous")):SizedBox(height: 10,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+                              shape: RoundedRectangleBorder( //to set border radius to button
+                          borderRadius: BorderRadius.circular(50)
+                       ) ),
+                      onPressed: (){
+                      if(index<=5){
+                        if(index==0){
+                          setState(() {
+                          ans1 = _currentValue;
+                          print("the ans to Q1 is $ans1");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==1){
+                          setState(() {
+                          ans2 = _currentValue;
+                          print("the ans to Q2 is $ans2");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==2){
+                          setState(() {
+                          ans3 = _currentValue;
+                          print("the ans to Q3 is $ans3");
+                          _currentValue = 5;
+                          index++;
+                            
+                          }); 
+                        }
+                        else if(index==3){
+                          setState(() {
+                          ans4 = _currentValue;
+                          print("the ans to Q4 is $ans4");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==4){
+                          setState(() {
+                          ans5 = _currentValue;
+                          print("the ans to Q5 is $ans5");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==5){
+                          setState(() {ans6 = _currentValue;
+                          print("the ans to Q6 is $ans6");
+                          _currentValue = 5;
+                          index++;
+                          });
+                          }
                       }
-                  }
-                  else{
-                    //Store Data to Fire Store
-                    FirebaseFirestore.instance
+                      else{
+                        //Store Data to Fire Store
+                        FirebaseFirestore.instance
               .collection("User Answers") //folder
               .doc(userId).collection("Home").doc(userId).set({
             "Q1": ans1,
@@ -176,13 +191,15 @@ class _HomeQuizState extends State<HomeQuiz> {
             "Q6": ans6,
             "Average": (ans1+ans2+ans3+ans4+ans5+ans6)/6
           });
-                    print("Data Stored and UserId is $userId");
-                    Navigator.of(context).pushNamed(Onboard.routeName);
+                        print("Data Stored and UserId is $userId");
+                        Navigator.of(context).pushNamed(FamilyQuiz.routeName);
         
-                  }
-                }, child:  index<=5? const Text("Next"):const Text("Finish") ),
+                      }
+                    }, child:  index<=5? const Text("Next"):const Text("Move to next section") ),
+                  ],
+                ),
                 const SizedBox(height: 20,),
-                ElevatedButton(onPressed: (){
+                index<=5?ElevatedButton(onPressed: (){
                   setState(() {
                     setState(() {
                     index++;
@@ -190,10 +207,12 @@ class _HomeQuizState extends State<HomeQuiz> {
                     });
                   });
                 }, style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
+                  backgroundColor: Colors.purple.withOpacity(0.3),
+                          padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
                             shape: RoundedRectangleBorder( //to set border radius to button
                       borderRadius: BorderRadius.circular(50)
-                   ) ), child: const Text("Skip"),)
+                   ) ), child: const Text("Skip", style: TextStyle(color: Colors.black),),)
+                : SizedBox(height: 20,)
                 
                 ]),
           ),

@@ -1,34 +1,34 @@
-// ignore_for_file: depend_on_referenced_packages
-
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:wheel_of_life/Quiz%20Functionality/Quiz/work_quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/money_quiz.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
 
-class FreeQuiz extends StatefulWidget {
-  static const routeName = "my-free-quiz";
-  const FreeQuiz({super.key});
+class WorkQuiz extends StatefulWidget {
+  static const routeName = "my-work-quiz";
+  const WorkQuiz({super.key});
 
   @override
-  State<FreeQuiz> createState() => _FreeQuizState();
+  State<WorkQuiz> createState() => _WorkQuizState();
 }
 
-class _FreeQuizState extends State<FreeQuiz> {
+class _WorkQuizState extends State<WorkQuiz> {
   List<String> Questions = [
-    "Q1: Do I have enough leisure time, or do I think it should have more?",
-    "Q2: Do I feel that I take advantage of the time I have and take advantage of my leisure?",
-    "Q3: May I have enough in my leisure times or do I feel bored, and I don't enjoy it?",
-    "Q4: What other activities do, such as reading, cinema, TV, shows, see photos, study, etc.?",
-    "Q5: Am I satisfied doing a sport, practicing a hobby such as playing video games, etc.?",
-    "Q6: How do I value the leisure in which I participate with other people, such as a meeting with friends, family, games, etc.?",
-    "Free Time questions are completed",
+    "Q1: I feel satisfied with my performance in the work environment and I really want to work on what I do?",
+    "Q2: Am I satisfied with the functions I perform, and I am developing tasks that generate value in the company?",
+    "Q3: Do I feel comfortable in my company and she respects my values?",
+    "Q4: Am I satisfied with my boss or me in my role as a boss?",
+    "Q5: Do I feel that we form a good team with my teammates?",
+    "Q6: Do I feel satisfied with the work of my collaborators and we form a good team?",
+    "Q7: Am I recognized in my work, I feel that the work I do is valued?",
+    "Q8: Do I feel satisfied with the economic income and other remuneration that my work gives me?",
+    "Work questions are completed",
     ];
-  List<String> topic = ["Leisure","Quality Time","Fun","Variety","Tastes","Participatory",];
+  List<String> topic = ["Working capacity","Functions","Company","Boss","Companions","Collaborators","Recognition","Remuneration"];
   int index = 0;
   int _currentValue = 5;
   int ans1 = 0;
@@ -76,7 +76,7 @@ class _FreeQuizState extends State<FreeQuiz> {
                       children: [Text("Section", style: TextStyle(fontSize: 18),)],),
                   ),
                   const SizedBox(height: 10),
-                  const Text("Free Time",style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                  const Text("Work",style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                   const SizedBox(height: 10),
                   Container(
                     color: Colors.purple.withOpacity(0.3),
@@ -84,7 +84,7 @@ class _FreeQuizState extends State<FreeQuiz> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text("Subject: ", style: TextStyle(fontSize: 18),),
-                        index<=5? Text(topic[index], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),):const SizedBox(height: 20,)
+                        index<=7? Text(topic[index], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),):const SizedBox(height: 20,)
                         ],),
                   ),
                   const SizedBox(height: 50,),
@@ -92,7 +92,7 @@ class _FreeQuizState extends State<FreeQuiz> {
                   alignment: Alignment.center,
                   child: Text(Questions[index],textAlign: TextAlign.center ,style: const TextStyle(fontSize: 18),)),
                   const  SizedBox(height: 80,),
-                index>5? const SizedBox(height: 20,): NumberPicker(
+                index>7? const SizedBox(height: 20,): NumberPicker(
                   itemCount: 3,
                 selectedTextStyle: const TextStyle(fontSize: 24,fontWeight: FontWeight.bold, ),
                 textStyle: const TextStyle(fontSize: 18,color: Colors.deepPurple),
@@ -108,19 +108,19 @@ class _FreeQuizState extends State<FreeQuiz> {
                 onChanged: (value) { setState(()=> _currentValue = value);},),
                 const SizedBox(height: 40,),
                 Row(
-                  mainAxisAlignment: index <=5 ? MainAxisAlignment.spaceAround : MainAxisAlignment.center,
+                  mainAxisAlignment: index <=7 ? MainAxisAlignment.spaceAround : MainAxisAlignment.center,
                   children: [
-                    index<=5? ElevatedButton(onPressed: (){
+                    index<=7? ElevatedButton(onPressed: (){
                       setState(() {
                         index--;
                       });
                     }, 
                     style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
-                              shape: RoundedRectangleBorder( //to set border radius to button
+                              shape: RoundedRectangleBorder( 
                           borderRadius: BorderRadius.circular(50)
                        ) ),
-                    child: const Text("Previous")):SizedBox(height: 10,),
+                    child: const Text("Previous")):const SizedBox(height: 10,),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
@@ -128,7 +128,7 @@ class _FreeQuizState extends State<FreeQuiz> {
                           borderRadius: BorderRadius.circular(50)
                        ) ),
                       onPressed: (){
-                      if(index<=5){
+                      if(index<=7){
                         if(index==0){
                           setState(() {
                           ans1 = _currentValue;
@@ -170,36 +170,53 @@ class _FreeQuizState extends State<FreeQuiz> {
                           index++; 
                           });
                         }
-                        else if(index==5){
+                       else if(index==5){
                           setState(() {ans6 = _currentValue;
                           print("the ans to Q6 is $ans6");
                           _currentValue = 5;
                           index++;
                           });
                           }
+                        else if(index==6){
+                          setState(() {
+                          ans7 = _currentValue;
+                          print("the ans to Q7 is $ans7");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==7){
+                          setState(() {
+                          ans8 = _currentValue;
+                          print("the ans to Q8 is $ans8");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
                       }
                       else{
-                        //Store Data to Fire Store
                         FirebaseFirestore.instance
-              .collection("User Answers") //folder
-              .doc(userId).collection("Free Time").doc(userId).set({
+              .collection("User Answers")
+              .doc(userId).collection("Work").doc(userId).set({
             "Q1": ans1,
             "Q2": ans2,
             "Q3": ans3,
             "Q4": ans4,
             "Q5": ans5,
             "Q6": ans6,
-            "Average": (ans1+ans2+ans3+ans4+ans5+ans6)/6
+            "Q7": ans7,
+            "Q8": ans8,
+            "Average": (ans1+ans2+ans3+ans4+ans5+ans6+ans7+ans8)/8
           });
                         print("Data Stored and UserId is $userId");
-                        Navigator.of(context).pushNamed(WorkQuiz.routeName);
+                        Navigator.of(context).pushNamed(MoneyQuiz.routeName);
         
                       }
-                    }, child:  index<=5? const Text("Next"):const Text("Move to next section") ),
+                    }, child:  index<=7? const Text("Next"):const Text("Move to next section") ),
                   ],
                 ),
                 const SizedBox(height: 20,),
-                index<=5?ElevatedButton(onPressed: (){
+                index<=7?ElevatedButton(onPressed: (){
                   setState(() {
                     setState(() {
                     index++;
@@ -212,7 +229,7 @@ class _FreeQuizState extends State<FreeQuiz> {
                             shape: RoundedRectangleBorder( //to set border radius to button
                       borderRadius: BorderRadius.circular(50)
                    ) ), child: const Text("Skip", style: TextStyle(color: Colors.black),),)
-                : SizedBox(height: 20,)
+                : const SizedBox(height: 20,)
                 
                 ]),
           ),

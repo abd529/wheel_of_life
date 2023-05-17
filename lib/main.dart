@@ -7,24 +7,27 @@ import 'package:wheel_of_life/Quiz%20Functionality/Quiz/family_quiz.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/Quiz/health_quiz.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/Quiz/home_quiz.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/Quiz/love_quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/money_quiz.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/Quiz/p_growth_quiz.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/work_quiz.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/quiz_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:wheel_of_life/Screens/home_screen.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:wheel_of_life/Screens/stripe_payment.dart';
 import 'package:wheel_of_life/Screens/youtube_screen.dart';
 import 'Authentication/login_screen.dart';
 import 'Quiz Functionality/Quiz/baseline_quiz.dart';
+import 'Quiz Functionality/Quiz/free_quiz.dart';
 import 'Screens/email.dart';
-import 'Screens/home_screen.dart';
 import 'Screens/report.dart';
 import 'l10n/l10n.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey = "pk_test_51N6W5EGatw2HfTd6c60FZQm1vK3PkiPhvTHXHsEyxwoRSTqD5n0wI5ygeIyQc9CLPlxrw5W3Bh1ANzNK1FochHAP00V7eHWlsg"; 
+  Stripe.publishableKey = "pk_test_51N3ozXKuYtdF845ofkT3mnJPklviwqoYWXmh4rBRta7f4ULTStn7H5FPUizInnktKg2yDp2YdeiU9liipwYjv8hj00OyAY8oAp"; 
   await Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -73,13 +76,17 @@ class _MyAppState extends State<MyApp> {
         BaseLineQuiz.routeName : (ctx) => const BaseLineQuiz(),
         ForgotPassword.routeName : (ctx) => ForgotPassword(),
         EmailSend.routeName : (ctx) => EmailSend(),
-        StripePayment.routeName : (ctx) => const StripePayment(),
+        StripePayment.routeName : (ctx) => StripePayment(money: "2500"),
         Onboard.routeName : (ctx) => Onboard(),
         HealthQuiz.routeName : (ctx) => HealthQuiz(),
         PersonalQuiz.routeName : (ctx) => PersonalQuiz(),
         HomeQuiz.routeName : (ctx) => HomeQuiz(),
         FamilyQuiz.routeName : (ctx) => FamilyQuiz(),
-        LoveQuiz.routeName: (ctx) => LoveQuiz() 
+        LoveQuiz.routeName: (ctx) => LoveQuiz(),
+        FreeQuiz.routeName : (ctx) => FreeQuiz(),
+        WorkQuiz.routeName : (ctx) => WorkQuiz(),
+        MoneyQuiz.routeName : (ctx) => MoneyQuiz(),
+        HomeScreen.routeName : (ctx) => HomeScreen()
       },
     );
   }

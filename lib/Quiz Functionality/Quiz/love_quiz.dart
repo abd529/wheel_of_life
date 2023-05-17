@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:wheel_of_life/Quiz%20Functionality/Quiz/free_quiz.dart';
 import 'package:wheel_of_life/Screens/onboard_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -25,7 +26,7 @@ class _LoveQuizState extends State<LoveQuiz> {
     "Q6: Am I faithful in my relationships, and I have the confidence that my partner is the same?",
     "Q7: Do I have sexual relations with my partner and it attracts me physically?",
     "Q8: Do I feel really loved and positively value all the mental and emotional part of my partner?",
-    "You are done",
+    "Love Questions are completed",
     ];
   List<String> topic = ["Ability to love","Number of relationships","Duration","Communication","Coexistence","Fidelity","Sexual Passion","Emotional Passion"];
   int index = 0;
@@ -106,81 +107,95 @@ class _LoveQuizState extends State<LoveQuiz> {
                 maxValue: 10,
                 onChanged: (value) { setState(()=> _currentValue = value);},),
                 const SizedBox(height: 40,),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
-                          shape: RoundedRectangleBorder( //to set border radius to button
-                      borderRadius: BorderRadius.circular(50)
-                   ) ),
-                  onPressed: (){
-                  if(index<=7){
-                    if(index==0){
+                Row(
+                  mainAxisAlignment: index <=7 ? MainAxisAlignment.spaceAround : MainAxisAlignment.center,
+                  children: [
+                    index<=7? ElevatedButton(onPressed: (){
                       setState(() {
-                      ans1 = _currentValue;
-                      print("the ans to Q1 is $ans1");
-                      _currentValue = 5;
-                      index++; 
+                        index--;
                       });
-                    }
-                    else if(index==1){
-                      setState(() {
-                      ans2 = _currentValue;
-                      print("the ans to Q2 is $ans2");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                    else if(index==2){
-                      setState(() {
-                      ans3 = _currentValue;
-                      print("the ans to Q3 is $ans3");
-                      _currentValue = 5;
-                      index++;
-                        
-                      }); 
-                    }
-                    else if(index==3){
-                      setState(() {
-                      ans4 = _currentValue;
-                      print("the ans to Q4 is $ans4");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                    else if(index==4){
-                      setState(() {
-                      ans5 = _currentValue;
-                      print("the ans to Q5 is $ans5");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                   else if(index==5){
-                      setState(() {ans6 = _currentValue;
-                      print("the ans to Q6 is $ans6");
-                      _currentValue = 5;
-                      index++;
-                      });
+                    }, 
+                    style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                              shape: RoundedRectangleBorder( 
+                          borderRadius: BorderRadius.circular(50)
+                       ) ),
+                    child: const Text("Previous")):const SizedBox(height: 10,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+                              shape: RoundedRectangleBorder( //to set border radius to button
+                          borderRadius: BorderRadius.circular(50)
+                       ) ),
+                      onPressed: (){
+                      if(index<=7){
+                        if(index==0){
+                          setState(() {
+                          ans1 = _currentValue;
+                          print("the ans to Q1 is $ans1");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==1){
+                          setState(() {
+                          ans2 = _currentValue;
+                          print("the ans to Q2 is $ans2");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==2){
+                          setState(() {
+                          ans3 = _currentValue;
+                          print("the ans to Q3 is $ans3");
+                          _currentValue = 5;
+                          index++;
+                            
+                          }); 
+                        }
+                        else if(index==3){
+                          setState(() {
+                          ans4 = _currentValue;
+                          print("the ans to Q4 is $ans4");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==4){
+                          setState(() {
+                          ans5 = _currentValue;
+                          print("the ans to Q5 is $ans5");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                       else if(index==5){
+                          setState(() {ans6 = _currentValue;
+                          print("the ans to Q6 is $ans6");
+                          _currentValue = 5;
+                          index++;
+                          });
+                          }
+                        else if(index==6){
+                          setState(() {
+                          ans7 = _currentValue;
+                          print("the ans to Q7 is $ans7");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
+                        else if(index==7){
+                          setState(() {
+                          ans8 = _currentValue;
+                          print("the ans to Q8 is $ans8");
+                          _currentValue = 5;
+                          index++; 
+                          });
+                        }
                       }
-                    else if(index==6){
-                      setState(() {
-                      ans7 = _currentValue;
-                      print("the ans to Q7 is $ans7");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                    else if(index==7){
-                      setState(() {
-                      ans8 = _currentValue;
-                      print("the ans to Q8 is $ans8");
-                      _currentValue = 5;
-                      index++; 
-                      });
-                    }
-                  }
-                  else{
-                    FirebaseFirestore.instance
+                      else{
+                        FirebaseFirestore.instance
               .collection("User Answers")
               .doc(userId).collection("Love").doc(userId).set({
             "Q1": ans1,
@@ -193,13 +208,15 @@ class _LoveQuizState extends State<LoveQuiz> {
             "Q8": ans8,
             "Average": (ans1+ans2+ans3+ans4+ans5+ans6+ans7+ans8)/8
           });
-                    print("Data Stored and UserId is $userId");
-                    Navigator.of(context).pushNamed(Onboard.routeName);
+                        print("Data Stored and UserId is $userId");
+                        Navigator.of(context).pushNamed(FreeQuiz.routeName);
         
-                  }
-                }, child:  index<=7? const Text("Next"):const Text("Finish") ),
+                      }
+                    }, child:  index<=7? const Text("Next"):const Text("Move to next section") ),
+                  ],
+                ),
                 const SizedBox(height: 20,),
-                ElevatedButton(onPressed: (){
+                index<=7?ElevatedButton(onPressed: (){
                   setState(() {
                     setState(() {
                     index++;
@@ -207,10 +224,12 @@ class _LoveQuizState extends State<LoveQuiz> {
                     });
                   });
                 }, style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
+                  backgroundColor: Colors.purple.withOpacity(0.3),
+                          padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
                             shape: RoundedRectangleBorder( //to set border radius to button
                       borderRadius: BorderRadius.circular(50)
-                   ) ), child: const Text("Skip"),)
+                   ) ), child: const Text("Skip", style: TextStyle(color: Colors.black),),)
+                : const SizedBox(height: 20,)
                 
                 ]),
           ),

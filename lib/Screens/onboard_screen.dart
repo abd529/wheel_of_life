@@ -7,13 +7,17 @@ import 'package:wheel_of_life/Authentication/login_screen.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/Quiz/family_quiz.dart';
 import 'package:wheel_of_life/Quiz%20Functionality/Quiz/love_quiz.dart';
 import 'package:wheel_of_life/Screens/email.dart';
+import 'package:wheel_of_life/Screens/home_screen.dart';
 import 'package:wheel_of_life/Screens/report.dart';
 import 'package:wheel_of_life/Screens/stripe_payment.dart';
 
 import '../Quiz Functionality/Quiz/baseline_quiz.dart';
+import '../Quiz Functionality/Quiz/free_quiz.dart';
 import '../Quiz Functionality/Quiz/health_quiz.dart';
 import '../Quiz Functionality/Quiz/home_quiz.dart';
+import '../Quiz Functionality/Quiz/money_quiz.dart';
 import '../Quiz Functionality/Quiz/p_growth_quiz.dart';
+import '../Quiz Functionality/Quiz/work_quiz.dart';
 import '../main.dart';
 
 
@@ -126,10 +130,22 @@ class _OnboardState extends State<Onboard> {
             ElevatedButton(onPressed: (){
               Navigator.of(context).pushNamed(LoveQuiz.routeName);
             }, child: const Text("Love Quiz")),
+            ElevatedButton(onPressed: (){
+              Navigator.of(context).pushNamed(FreeQuiz.routeName);
+            }, child: const Text("Free Time Quiz")),
+            ElevatedButton(onPressed: (){
+              Navigator.of(context).pushNamed(WorkQuiz.routeName);
+            }, child: const Text("Work Quiz")),
+            ElevatedButton(onPressed: (){
+              Navigator.of(context).pushNamed(MoneyQuiz.routeName);
+            }, child: const Text("Money Quiz")),
             ElevatedButton(onPressed: ()async{
                await FirebaseAuth.instance.signOut();
                Navigator.of(context).pushNamed(EmailSend.routeName);
             }, child: const Text("Email Send")),
+            ElevatedButton(onPressed: ()async{
+               Navigator.of(context).pushNamed(HomeScreen.routeName);
+            }, child: const Text("Home")),
             ElevatedButton(onPressed: ()async{
                Navigator.of(context).pushNamed(StripePayment.routeName);
             }, child: const Text("Stripe")),

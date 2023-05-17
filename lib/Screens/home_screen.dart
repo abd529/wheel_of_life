@@ -8,6 +8,7 @@ import 'package:wheel_of_life/Quiz%20Functionality/Quiz/baseline_quiz.dart';
 
 
 class HomeScreen extends StatefulWidget {
+  static const routeName = "home-screen";
   const HomeScreen({super.key});
 
   @override
@@ -151,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         shape: RoundedRectangleBorder( //to set border radius to button
                   borderRadius: BorderRadius.circular(50)
                             ),
-                    ), child: const Text("Start Quiz"))
+                    ), child: const Text("Start"))
                 ],
               ),
             ),
